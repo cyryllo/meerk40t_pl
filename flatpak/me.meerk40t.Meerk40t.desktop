@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Meerk40t
+Comment=Oprogramowanie do wycinarek laserowych K40
+# Tu wpisujemy tylko nazwę komendy zdefiniowanej w manifeście (command)
+Exec=meerk40t
+# Nazwa pliku ikony (bez rozszerzenia .png)
+Icon=me.meerk40t.Meerk40t
+Terminal=false
+Categories=Graphics;Engineering;
+StartupNotify=true

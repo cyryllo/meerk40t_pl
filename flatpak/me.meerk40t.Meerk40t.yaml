@@ -1,0 +1,73 @@
+app-id: me.meerk40t.Meerk40t
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: meerk40t
+
+finish-args:
+  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=ipc
+  - --device=all          # Kluczowe dla USB
+  - --share=network
+  - --filesystem=home
+  - --socket=pulseaudio   # opcjonalne dzwięk
+
+modules:
+  # -------------------------------------------------------------------------
+  # 1. BIBLIOTEKA SYSTEMOWA (Nie ma jej w PyPI)
+  # -------------------------------------------------------------------------
+  - name: libusb
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
+        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+
+  # -------------------------------------------------------------------------
+  # 2. TWOJE MODUŁY PYTHON (To co skompilowałeś)
+  # -------------------------------------------------------------------------
+  # Zakładam, że wygenerowałeś to poleceniem:
+  # ./flatpak-pip-generator --output python3-modules.json ... (lista Twoich paczek)
+  - python3-modules.json
+
+
+  # -------------------------------------------------------------------------
+  # 3. KOD APLIKACJI (Kopiowanie ręczne)
+  # -------------------------------------------------------------------------
+  - name: meerk40t
+    buildsystem: simple
+    build-commands:
+      # Kopiujemy całe źródła do folderu share
+      - mkdir -p /app/share/meerk40t
+      - cp -r ./* /app/share/meerk40t/
+
+      # TWORZYMY SKRYPT STARTOWY RĘCZNIE
+      # To polecenie stworzy plik /app/bin/meerk40t, który odpali Twój plik .py
+      - |
+        echo '#!/bin/sh
+        exec python3 /app/share/meerk40t/meerk40t.py "$@"' > /app/bin/meerk40t
+      - chmod +x /app/bin/meerk40t
+        # 2. Instalacja pliku .desktop (Menu Start)
+      # Tworzy katalog (jeśli nie istnieje) i kopiuje plik
+      - install -D me.meerk40t.Meerk40t.desktop /app/share/applications/me.meerk40t.Meerk40t.desktop
+
+      # 3. Instalacja metadanych (Opis dla sklepu z aplikacjami)
+      - install -D me.meerk40t.Meerk40t.metainfo.xml /app/share/metainfo/me.meerk40t.Meerk40t.metainfo.xml
+
+      # 4. Instalacja ikony (Musi być w odpowiedniej ścieżce hicolor)
+      - install -D me.meerk40t.Meerk40t.png /app/share/icons/hicolor/128x128/apps/me.meerk40t.Meerk40t.png
+    sources:
+      - type: git
+        url: https://github.com/meerk40t/meerk40t.git
+        tag: 0.9.8920.36
+
+
+# Dołączenie plików lokalnych, które masz w folderze z manifestem
+      - type: file
+        path: me.meerk40t.Meerk40t.desktop
+      - type: file
+        path: me.meerk40t.Meerk40t.metainfo.xml
+      - type: file
+        path: me.meerk40t.Meerk40t.png

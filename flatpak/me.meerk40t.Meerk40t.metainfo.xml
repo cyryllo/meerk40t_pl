@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>me.meerk40t.Meerk40t</id>
+
+    <metadata_license>FSFAP</metadata_license>
+    <project_license>MIT</project_license>
+    <name>Meerk40t</name>
+    <summary>Oprogramowanie do wycinarek laserowych K40 i innych</summary>
+
+    <developer_name>Cyryl Sochacki</developer_name>
+
+    <description>
+        <p>
+            Meerk40t to darmowe oprogramowanie open-source do sterowania laserami k40 oraz innymi
+        </p>
+    </description>
+
+    <launchable type="desktop-id">me.meerk40t.Meerk40t.desktop</launchable>
+    <content_rating type="oars-1.1" />
+</component>
