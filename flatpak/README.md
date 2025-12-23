@@ -1,5 +1,9 @@
-# Instukcja budowy flatpak
+# Instrukcja budowy flatpak dla Meerk40t
+Przygotowałem konfigurację manifestu oraz niezbędnych plików do zbudowania aplikacji MeerK40t w paczce Flatpak. Konfiguracja w obecnej chwili jest w fazie testowej. Pełną dokumentację i instrukcję przygotuję po sprawdzeniu że wszystkie funkcje programu (dziek czy komunikacja z siecią oraz USB/Portami szeregowymi pracują poprawnie). Przygotuję również w późniejszym czasie tłumaczenie na język angielski instrukcji i dokumentacji.
 
+>Obecnie konfiguracja zależności posiada minimalne pakiety które są potrzebne. W pliku requirements.txt wpisane są już wszystkie moduły lecz jeszczer ich nie testowałem. 
+
+## Utworzenie pliku z zależnościami
 W pierwszej klejności należy zbudować plik z zależnościami jeśli dodałeś jakieś dodatkowe moduły lub hasze już wygasły. Domyślnie dodałem podstawode moduły, które są wymagane przy budowie flatpak-a.
 
 ```bash
