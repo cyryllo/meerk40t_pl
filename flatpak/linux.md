@@ -12,7 +12,7 @@ sudo nano /etc/udev/rules.d/97-ctc-lasercutter.rules
 ```
 Wpisz poniższy tekst do pliku i zamień [VENDOR ID] oraz [PRODUCT ID] na informacje uzyskane z lsusb:
 ```bash
-SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5512", ENV{DEVTYPE}=="usb_device", MODE="0664", GROUP="lasercutter"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5512", ENV{DEVTYPE}=="usb_device", MODE="0664", GROUP="dialout"
 ```
 Zapisz plik Ctrl+o i wyjdź Ctrl+x
 
