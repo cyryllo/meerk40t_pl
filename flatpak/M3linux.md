@@ -6,7 +6,8 @@ Next, we need to create a udev rule for our laser. We will need the Vendor ID an
 ```bash
 lsusb
 ```
-Next, create the rule as superuser dfor M2 or M3 nano board
+Only for k40 user with M2 and M3 nano board:  create the rule as superuser
+
 ```bash
 sudo nano /etc/udev/rules.d/97-ctc-lasercutter.rules
 ```
