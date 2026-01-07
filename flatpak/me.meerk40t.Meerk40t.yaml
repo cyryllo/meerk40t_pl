@@ -61,7 +61,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/meerk40t/meerk40t.git
-        tag: 0.9.8920.36  # podaj tag aby wybrać, która wersja ma zostać zbudowana
+        tag: 0.9.8940  # podaj tag aby wybrać, która wersja ma zostać zbudowana
 
 
 # Dołączenie plików lokalnych, które masz w folderze z manifestem

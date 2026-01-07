@@ -1,19 +1,19 @@
-Aby w linuksie miec komunikację z urządzeniami podłączonymi pod USB i serialporty trzeba dodac użytkownika na linuksie do grupy `dialout`
+To communicate with devices connected via USB and serial ports in Linux, you need to add the user to the `dialout` group in Linux
 ```bash
 sudo usermod -a -G dialout $USER
 ```
-Następnie musimy utworzyć regułę udev dla naszego laser. Będziemy potrzebować nr Vendor ID ortaz Produkt ID. Możemy to otrzymać podając polecenie
+Next, we need to create a udev rule for our laser. We will need the Vendor ID and Product ID. We can obtain this by entering the command
 ```bash
 lsusb
 ```
-Następnie tworzymy regułe jako super użytkownik
+Next, create the rule as superuser
 ```bash
 sudo nano /etc/udev/rules.d/97-ctc-lasercutter.rules
 ```
-Wpisz poniższy tekst do pliku i zamień [VENDOR ID] oraz [PRODUCT ID] na informacje uzyskane z lsusb:
+Enter the following text into the file and replace [VENDOR ID] and [PRODUCT ID] with the information obtained from lsusb:
 ```bash
-SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5512", ENV{DEVTYPE}=="usb_device", MODE="0664", GROUP="dialout"
+SUBSYSTEM==“usb”, ATTRS{idVendor}==“1a86”, ATTRS{idProduct}==‘5512’, ENV{DEVTYPE}==“usb_device”, MODE="0664", GROUP="dialout"
 ```
-Zapisz plik Ctrl+o i wyjdź Ctrl+x
+Save the file with Ctrl+o and exit with Ctrl+x
 
-Po tym zrestartuj system.
+Then restart the system for the changes to take effect.

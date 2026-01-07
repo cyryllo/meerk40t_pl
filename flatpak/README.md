@@ -1,27 +1,27 @@
-# Instrukcja budowy flatpak dla Meerk40t
-Przygotowałem konfigurację manifestu oraz niezbędnych plików do zbudowania aplikacji MeerK40t w paczce Flatpak. Konfiguracja w obecnej chwili jest w fazie testowej. Pełną dokumentację i instrukcję przygotuję po sprawdzeniu, że wszystkie funkcje programu (dzwiek czy komunikacja z siecią oraz USB/COM pracują poprawnie). Przygotuję również w późniejszym czasie tłumaczenie na język angielski instrukcji i dokumentacji.
+# Flatpak build instructions for Meerk40t
+I have prepared the manifest configuration and the necessary files to build the MeerK40t application in a Flatpak package. The configuration is currently in the testing phase (although according to my tests, everything works as it should). 
 
->Obecnie konfiguracja zależności posiada minimalne pakiety, które są potrzebne do stworzenia flatpak-a. W pliku requirements.txt wpisane są już wszystkie moduły lecz jeszcze ich nie testowałem. 
+## Creating a dependencies file
+First, you need to build a dependencies file if you have added any additional modules or the hashes have expired. By default, I have generated a file with dependencies (in the python-modules.json file) that are required when building flatpak.
 
-## Utworzenie pliku z zależnościami
-W pierwszej klejności należy zbudować plik z zależnościami jeśli dodałeś jakieś dodatkowe moduły lub hasze już wygasły. Domyślnie dodałem podstawowe moduły (w pliku python-modules.json), które są wymagane przy budowie flatpak-a.
+Translated with DeepL.com (free version)
 
 ```bash
 python3 flatpak-pip-generator.py --requirements requirements.txt -o python-modules.json
 ```
 
-W kolejnym kroku możemy rozpocząć budowę flatpak (tylko budowa aby sprawdzć czy nie ma błędów. Może to trochę potwać)
+In the next step, we can start building flatpak (only building to check if there are any errors. This may take a while).
 
 ```bash
 flatpak-builder --force-clean build-dir me.meerk40t.MeerK40t.yaml
 ```
 
-Jeśli wszystko się zbudowało nalży stworzyć repozytorium i na kocu zbudować sam plik .flatpak
+If everything has been built, create a repository and finally build the .flatpak file itself.
 ```bash
 flatpak-builder --repo=repo --force-clean build-dir me.meerk40t.Meerk40t.yaml
 ```
 
-I samo zbuddowanie pliku .flatpak który można wysłać lub udostępnić innym do instalacji
+And just build a .flatpak file that you can send or share with others for installation.
 
 ```bash
 flatpak build-bundle repo Meerk40t.flatpak me.meerk40t.Meerk40t
