@@ -5,16 +5,45 @@
     <metadata_license>FSFAP</metadata_license>
     <project_license>MIT</project_license>
     <name>Meerk40t</name>
-    <summary>Oprogramowanie do wycinarek laserowych K40 i innych</summary>
+    <summary>Meerk40t - alternative software for CO2 and LED lasers</summary>
 
     <developer_name>Cyryl Sochacki</developer_name>
 
     <description>
         <p>
-            Meerk40t to darmowe oprogramowanie open-source do sterowania laserami k40 oraz innymi
-        </p>
+      MeerK40t (pronounced MeerKat) is a built-from-the-ground-up MIT licensed open-source laser cutting software.
+    </p>
+    <p>
+      The primary goals of this software are simple:
+    </p>
+    <ul>
+      <li>Provide users with high quality laser control software.</li>
+      <li>Provide developers with a highly extensible platform to help further their own ideas, and provide novel work to the laser community at large.</li>
+    </ul>
+    <p>
+      Supported devices:
+    </p>
+    <ul>
+      <li>Lihuiyu M2/M3-Nano (aka K40 lasers)</li>
+      <li>Any GRBL device (Atomstack, Creality, Longer, Ortur etc...)</li>
+      <li>Ezcad2-compatible JCZ controllers galvo lasers</li>
+      <li>Moshiboard</li>
+      <li>NewlyDraw System 8.1 Lasers</li>
+      <li>Ruida-Emulation (Middleman between Lightburn and K40)</li>
+    </ul>
     </description>
 
     <launchable type="desktop-id">me.meerk40t.Meerk40t.desktop</launchable>
     <content_rating type="oars-1.1" />
+
+    <url type="homepage">https://meerk40t.github.io/</url>
+    <url type="bugtracker">https://github.com/meerk40t/meerk40t/issues</url>
+
+    <releases>
+    <release version="0.9.8940" date="2025-01-07">
+      <description>
+        <p>Initial Flatpak release.</p>
+      </description>
+    </release>
+  </releases>
 </component>

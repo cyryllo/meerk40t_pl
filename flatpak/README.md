@@ -13,7 +13,7 @@ python3 flatpak-pip-generator.py --requirements requirements.txt -o python-modul
 In the next step, we can start building flatpak (only building to check if there are any errors. This may take a while).
 
 ```bash
-flatpak-builder --force-clean build-dir me.meerk40t.MeerK40t.yaml
+flatpak-builder --force-clean build-dir me.meerk40t.Meerk40t.yaml
 ```
 
 If everything has been built, create a repository and finally build the .flatpak file itself.
