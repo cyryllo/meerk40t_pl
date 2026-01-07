@@ -4,8 +4,6 @@ I have prepared the manifest configuration and the necessary files to build the 
 ## Creating a dependencies file
 First, you need to build a dependencies file if you have added any additional modules or the hashes have expired. By default, I have generated a file with dependencies (in the python-modules.json file) that are required when building flatpak.
 
-Translated with DeepL.com (free version)
-
 ```bash
 python3 flatpak-pip-generator.py --requirements requirements.txt -o python-modules.json
 ```
