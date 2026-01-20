@@ -40,7 +40,7 @@
     <url type="bugtracker">https://github.com/meerk40t/meerk40t/issues</url>
 
     <releases>
-    <release version="0.9.8940" date="2025-01-07">
+    <release version="0.9.9000" date="2026-01-20">
       <description>
         <p>Initial Flatpak release.</p>
       </description>
