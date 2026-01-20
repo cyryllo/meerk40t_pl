@@ -22,25 +22,29 @@ from .wxutils import (
 
 _ = wx.GetTranslation
 
-HEADER_TEXT = (
-    "MeerK40t is a free MIT Licensed open source project\n"
-    + "for lasering on K40 Devices.\n\n"
-    + "Participation in the project is highly encouraged.\n"
-    + "Past participation, and continuing participation is graciously thanked.\n"
-    + "This program is mostly the brainchild of Tatarize,\n"
-    + "who sincerely hoped his contributions would be but\n"
-    + "the barest trickle that becomes a raging river."
-)
-HEADER_TEXT_2 = "Since early 2024 jpirnay has taken on the role of lead developer\ntrying to fill in some awfully large shoes."
+def get_header_text():
+    return _(
+        "MeerK40t is a free MIT Licensed open source project\n"
+        + "for lasering on K40 Devices.\n\n"
+        + "Participation in the project is highly encouraged.\n"
+        + "Past participation, and continuing participation is graciously thanked.\n"
+        + "This program is mostly the brainchild of Tatarize,\n"
+        + "who sincerely hoped his contributions would be but\n"
+        + "the barest trickle that becomes a raging river."
+    )
 
-EULOGY_TEXT = (
-    "MeerK40t is the result of an incredible piece of work by David Olsen aka Tatarize.\n"
-    + "He created this program over 4 years allowing users across the world to get the best out of their K40 equipment (and additional lasertypes).\n\n"
-    + "Despite having no risk factors for getting cancer, he developed a tumor on his tongue that metastasized into his lungs before the doctors could stop it and passed away on July 26, 2024.\n"
-    + "He was a mentor, an inspiration and a friend - David you will be missed but you won't be forgotten.\n\n"
-    + "Please join the fight against cancer and consider donating to one of the many research and charity organisations across the world.\n\n"
-    + "If you are interested to read more about MeerK40t's development history then please refer to:\nhttps://github.com/meerk40t/meerk40t/wiki/History:-Major-Version-History,-Changes,-and-Reasons"
-)
+def get_header_text_2():
+    return _("Since early 2024 jpirnay has taken on the role of lead developer\ntrying to fill in some awfully large shoes.")
+
+def get_eulogy_text():
+    return _(
+        "MeerK40t is the result of an incredible piece of work by David Olsen aka Tatarize.\n"
+        + "He created this program over 4 years allowing users across the world to get the best out of their K40 equipment (and additional lasertypes).\n\n"
+        + "Despite having no risk factors for getting cancer, he developed a tumor on his tongue that metastasized into his lungs before the doctors could stop it and passed away on July 26, 2024.\n"
+        + "He was a mentor, an inspiration and a friend - David you will be missed but you won't be forgotten.\n\n"
+        + "Please join the fight against cancer and consider donating to one of the many research and charity organisations across the world.\n\n"
+        + "If you are interested to read more about MeerK40t's development history then please refer to:\nhttps://github.com/meerk40t/meerk40t/wiki/History:-Major-Version-History,-Changes,-and-Reasons"
+    )
 
 class AboutPanel(wx.Panel):
     def __init__(self, *args, context=None, **kwds):
@@ -92,7 +96,7 @@ class AboutPanel(wx.Panel):
         self.meerk40t_about_text_header = wxStaticText(
             self,
             wx.ID_ANY,
-            _(HEADER_TEXT) + "\n" + _(HEADER_TEXT_2),
+            get_header_text() + "\n" + get_header_text_2(),
         )
 
         self.meerk40t_about_text_header.SetFont(
@@ -108,22 +112,27 @@ class AboutPanel(wx.Panel):
         hsizer_pic_info.Add(self.meerk40t_about_text_header, 1, wx.EXPAND, 0)
         vsizer_main.Add(hsizer_pic_info, 1, wx.EXPAND, 0)
         # Simplify addition of future developers without need to translate every single time
-        # Ordered by the amount of commits (as of Jan 2024)
-        # tatarize ~ 11.800
-        # jpirnay ~ 3.200
-        # Sophist-UK ~ 500
-        # tiger12506 ~ 90
-        # joerlane ~ 50
-        # jaredly ~ 15
-        # frogmaster ~ 10
-        hall_of_fame = [
-            "Sophist-UK",
-            "tiger12506",
-            "jaredly",
-            "frogmaster",
-            "inspectionsbybob",
-            "jondale",
+        # Ordered by the amount of commits (as of Jan 2026)
+        contributor_data = [
+            # Name, commit count, to be included in hall of fame
+            ("tatarize", 12014, False),
+            ("jpirnay", 6778, False),
+            ("Sophist-UK", 542, True),
+            ("tiger12506", 94, True),   
+            ("joerlane", 52, False),
+            ("BetaEta84", 47, True),
+            ("Laserology", 22, True),
+            ("ristraus", 20, True),
+            ("jaredly", 16, True),
+            ("frogmaster", 9, True),
+            ("jondale", 9, True),
         ]
+        # Top 5 contributors, sorted by commits unless flagged otherwise
+        hall_of_fame = [
+            name for name, commits, include in sorted(contributor_data, key=lambda x: x[1], reverse=True) if include and commits >= 20
+        ]
+        if len(hall_of_fame) < len(contributor_data):
+            hall_of_fame.append(_("and others"))
         meerk40t_about_text = wxStaticText(
             self,
             wx.ID_ANY,
@@ -137,7 +146,7 @@ class AboutPanel(wx.Panel):
             + _(
                 "* @joerlane for his hardware investigation wizardry into how the M2-Nano works.\n"
             )
-            + _("* All the MeerKittens, {developer}. \n").format(
+            + _("* All the MeerKittens, {developer}.\n").format(
                 developer=", ".join(hall_of_fame)
             )
             + _(
@@ -1485,7 +1494,7 @@ class DavidPanel(ScrolledPanel):
         )
         self.david_picture.SetSize(self.david_picture.GetBestSize())
         self.david_header = wxStaticText(self, wx.ID_ANY, "David Olsen (1982-2024)")
-        eulogy:str = _(EULOGY_TEXT)
+        eulogy:str = get_eulogy_text()
         if system() == "Darwin":
             # MacOS does not wrap labels around, so we need do it ourselves
             splitted = eulogy.split("\n")
